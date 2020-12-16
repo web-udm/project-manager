@@ -3,9 +3,31 @@ version: "2"
 services:
   php:
     build: .
-    container_name: project_app
+    container_name: project_php
     command: asdf
     volumes:
       - ./:/var/www
     ports:
       - 9000:9000
+  nginx:
+    image: nginx:latest
+    container_name: project_nginx
+    volumes:
+        - ./docker/conf/nginx.conf:/etc/nginx/nginx.conf
+        - ./docker/conf/certs:/etc/nginx/certs
+        - ./docker/conf/tmmarket.conf:/etc/nginx/conf.d/default.conf
+        - ./logs/nginx/:/var/log/nginx
+        - ./web/:/usr/share/nginx/html:ro
+        - ./app:/code/app:rw
+        - ./src:/code/src
+        - ./web:/code/web
+        - ./logs/symfony:/code/logs
+        - ./vendor:/code/vendor
+        - ./docker/conf/php-fpm-pool.ini:/etc/opt/remi/php71/php-fpm.d/www.conf
+        - ./docker/conf/php.ini:/etc/opt/remi/php71/php.ini
+        - ./logs/php/:/var/log/php-fpm
+    links:
+        - php:php
+    ports:
+        - 80:80
+        - 443:443
