@@ -4,7 +4,6 @@ services:
   php:
     build: .
     container_name: project_php
-    command: asdf
     volumes:
       - .:/var/www
     ports:
@@ -14,10 +13,9 @@ services:
     container_name: project_nginx
     volumes:
         - .:/var/www
-        - ./docker/conf/nginx.conf:/etc/nginx/nginx.conf
-        - ./docker/conf/tmmarket.conf:/etc/nginx/conf.d/default.conf
-        - ./docker/conf/php-fpm-pool.ini:/etc/opt/remi/php71/php-fpm.d/www.conf
-        - ./docker/conf/php.ini:/etc/opt/remi/php71/php.ini
+        - ./docker/nginx.conf:/etc/nginx/nginx.conf
+        - ./docker/project-manager.conf:/etc/nginx/conf.d/default.conf
+        - ./docker/php-fpm.ini:/etc/opt/remi/php71/php.ini
     links:
         - php:php
     ports:
