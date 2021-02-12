@@ -1,8 +1,8 @@
-FROM php:8.0-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 RUN apk update
 
-RUN apk --update add composer
+RUN add composer
 
 WORKDIR /var/www
 
