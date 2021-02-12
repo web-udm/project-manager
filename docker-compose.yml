@@ -21,3 +21,17 @@ services:
     ports:
         - 80:80
         - 443:443
+  project-postgresql:
+    image: postgres:13-alpine
+    container_name: project-postgresql
+    volumes:
+      - project-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: app
+    ports:
+      - "54321:5432"
+
+volumes:
+  project-postgres:
