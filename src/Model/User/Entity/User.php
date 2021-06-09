@@ -8,11 +8,21 @@ class User
 {
     private string $email;
 
-    private string $password;
+    private string $passwordHash;
 
-    public function __construct(string $email, string $password)
+    public function __construct(string $email, string $passwordHash)
     {
         $this->email = $email;
-        $this->password = $password;
+        $this->passwordHash = $passwordHash;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPasswordHash(): string
+    {
+        return $this->passwordHash;
     }
 }

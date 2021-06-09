@@ -17,6 +17,6 @@ class RequestTest extends TestCase
         );
 
         $this->assertEquals($email, $user->getEmail());
-        $this->assertEquals($passwordHash, $user->getPassword());
+        $this->assertEquals($passwordHash, $user->getPasswordHash());
     }
 }
