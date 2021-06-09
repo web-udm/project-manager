@@ -25,6 +25,7 @@ class Handler
         }
 
         $user = new User(
+            Uuid::
             $email,
             password_hash($command->password, PASSWORD_ARGON2I)
         );
