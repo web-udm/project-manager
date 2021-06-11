@@ -9,14 +9,18 @@ use App\Model\User\Entity\User;
 
 class Handler
 {
-    private $em;
-
-    public function __construct(EntityManagerInterface $em)
+    private function __construct()
     {
-        $this->em = $em;
+
     }
 
-    public function handle(Command $command): void
+    public function handle(Commmand $command): void
+    {
+
+    }
+
+
+/*    public function handle(Command $command): void
     {
         $email = mb_strtolower($command->email);
 
@@ -32,5 +36,5 @@ class Handler
 
         $this->em->persist($user);
         $this->em->flush();
-    }
+    }*/
 }
