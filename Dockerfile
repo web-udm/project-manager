@@ -5,6 +5,8 @@ WORKDIR /var/www
 RUN apt-get update && apt-get install -y \
 	libpq-dev \
 	wget \
+	zip \
+	unzpi \
 	git
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
