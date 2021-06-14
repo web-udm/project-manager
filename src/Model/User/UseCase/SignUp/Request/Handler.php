@@ -4,37 +4,38 @@ declare(strict_types=1);
 
 namespace App\Model\User\UseCase\SignUp\Request;
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Model\User\Entity\User;
+use App\Model\User\UseCase\SignUp\Request\Command;
 
 class Handler
 {
-    private function __construct()
-    {
+    private $users;
+    private $hasher;
+    private $flusher;
 
+    private function __construct(UserRepository $users, PasswordHasher $hasher, Flusher $flusher)
+    {
+        $this->users = $users;
+        $this->hasher = $hasher;
+        $this->flusher = $flusher;
     }
 
-    public function handle(Commmand $command): void
+    public function handle(Command $command): void
     {
+        $email = new Email($command->email);
 
-    }
-
-
-/*    public function handle(Command $command): void
-    {
-        $email = mb_strtolower($command->email);
-
-        if ($this->em->getRepository(User::class)->findOneBy(['email' => $email])) {
+        if ($this->users->hasByEmail($email)) {
             throw new \DomainException('User already exists');
         }
 
         $user = new User(
-            Uuid::
+            Id::next(),
+            new \DateTimeImmutable(),
             $email,
-            password_hash($command->password, PASSWORD_ARGON2I)
+            $this->hasher->hash($command->password)
         );
 
-        $this->em->persist($user);
-        $this->em->flush();
-    }*/
+        $this->users->add($user);
+
+        $this->flusher->flush();
+    }
 }

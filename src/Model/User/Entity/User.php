@@ -14,7 +14,7 @@ class User
 
     private string $passwordHash;
 
-    public function __construct(string $id, string $date, string $email, string $passwordHash)
+    public function __construct(Id $id, \DateTimeImmutable $date, Email $email, string $passwordHash)
     {
         $this->id = $id;
         $this->date = $date;
