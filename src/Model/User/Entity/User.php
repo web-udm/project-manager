@@ -6,11 +6,11 @@ namespace App\Model\User\Entity;
 
 class User
 {
-    private string $id;
+    private Id $id;
 
-    private string $date;
+    private \DateTimeImmutable $date;
 
-    private string $email;
+    private Email $email;
 
     private string $passwordHash;
 
